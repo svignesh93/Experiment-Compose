@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.litekite.compose.ui.theme
+package com.litekite.compose.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
@@ -22,26 +22,34 @@ import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
-)
-
 private val LightColorPalette = lightColors(
+    background = Color.White,
+    onBackground = Color.Black,
+    surface = Color.White,
+    onSurface = Color.Black,
     primary = Purple500,
     primaryVariant = Purple700,
-    secondary = Teal200,
-    background = Color.White,
-    surface = Color.White,
     onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
+    secondary = Teal200,
+    secondaryVariant = Teal700,
+    onSecondary = Color.Black
+)
+
+private val DarkColorPalette = darkColors(
+    background = Color.Black,
+    onBackground = Color.White,
+    surface = Color.Black,
+    onSurface = Color.White,
+    primary = Purple200,
+    primaryVariant = Purple700,
+    onPrimary = Color.Black,
+    secondary = Teal200,
+    secondaryVariant = Teal700,
+    onSecondary = Color.Black
 )
 
 @Composable
-fun ExperimentComposeTheme(
+fun ComposeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {

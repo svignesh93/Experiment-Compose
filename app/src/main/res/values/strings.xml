@@ -16,4 +16,5 @@
 -->
 <resources>
     <string name="app_name">ComposeExperiment</string>
+    <string name="compose">Compose</string>
 </resources>

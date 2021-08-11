@@ -53,7 +53,7 @@ spotless {
     }
     kotlin {
         target '**/src/**/*.kt'
-        ktlint("0.41.0")
+        ktlint("0.42.1")
         licenseHeaderFile rootProject.file('spotless/copyright.kt')
     }
 }

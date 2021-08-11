@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.litekite.compose.ui.theme
+package com.litekite.compose.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
