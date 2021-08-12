@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2021 LiteKite Startup. All rights reserved.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportHeight="401"
+    android:viewportWidth="401">
+    <path
+        android:fillColor="#E4E6E7"
+        android:pathData="M-44.736,-44.735l490.423,0l0,490.423l-490.423,0z" />
+    <path
+        android:fillColor="#AEB4B7"
+        android:pathData="m201.002,267.142c-103.362,0 -187.755,58.93 -192.476,132.842l384.988,0c-4.733,-73.918 -89.157,-132.842 -192.512,-132.842z" />
+    <path
+        android:fillColor="#AEB4B7"
+        android:pathData="m297.607,158.026c0,57.17 -42.935,103.516 -95.895,103.516s-95.895,-46.346 -95.895,-103.516 42.935,-103.516 95.895,-103.516c52.968,0 95.895,46.352 95.895,103.515z" />
+</vector>
