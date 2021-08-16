@@ -13,27 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.litekite.compose.conversation
+package com.litekite.compose.counter
 
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.appcompat.app.AppCompatActivity
 import com.litekite.compose.base.ComposeApp
 
 /**
- * This is the conversation sample from the jetpack compose pathway
+ * Increases counter when tapping a button
  *
  * @author Vignesh S
- * @see [Jetpack Compose basics]
- * @see [https://developer.android.com/courses/pathways/compose]
  */
-class ConversationActivity : ComponentActivity() {
+class CounterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeApp {
-                Conversation(SampleData.conversationSample)
+                Counter()
             }
         }
     }
