@@ -32,37 +32,81 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.Button
+import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
+import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.litekite.compose.R
+import coil.compose.rememberImagePainter
 import com.litekite.compose.base.ComposeApp
+import kotlinx.coroutines.launch
 
 @Composable
 fun Conversation(msgList: List<Message>) {
-    // LazyColumn and LazyRow only deals with elements that are visible on the screen
-    // LazyColumn places elements vertically and LazyRow places elements horizontally
-    LazyColumn {
-        items(msgList) { msg ->
-            MessageCard(msg)
-            Divider(
-                color = MaterialTheme.colors.onBackground,
-                modifier = Modifier.padding(2.dp)
-            )
+    // We save the scrolling position with this state that can also
+    // be used to programmatically scroll the list
+    val scrollState = rememberLazyListState()
+
+    // We save the coroutine scope where our animated scroll will be executed
+    val coroutineScope = rememberCoroutineScope()
+
+    Column {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(5.dp)
+        ) {
+            Button(
+                onClick = {
+                    coroutineScope.launch {
+                        scrollState.animateScrollToItem(0)
+                    }
+                },
+                modifier = Modifier.weight(1.0F)
+            ) {
+                Text("Scroll to the top")
+            }
+            Spacer(modifier = Modifier.padding(5.dp))
+            Button(
+                onClick = {
+                    coroutineScope.launch {
+                        scrollState.animateScrollToItem(msgList.size - 1)
+                    }
+                },
+                modifier = Modifier.weight(1.0F)
+            ) {
+                Text("Scroll to the bottom")
+            }
+        }
+
+        // LazyColumn and LazyRow only deals with elements that are visible on the screen
+        // LazyColumn places elements vertically and LazyRow places elements horizontally
+        LazyColumn(state = scrollState) {
+            items(msgList) { msg ->
+                MessageCard(msg)
+                Divider(
+                    color = MaterialTheme.colors.onBackground,
+                    modifier = Modifier.padding(2.dp)
+                )
+            }
         }
     }
 }
@@ -79,7 +123,9 @@ fun MessageCard(msg: Message) {
             .wrapContentHeight(align = Alignment.Top)
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_user_profile),
+            painter = rememberImagePainter(
+                data = "https://developer.android.com/images/brand/Android_Robot.png"
+            ),
             contentDescription = "Avatar",
             modifier = Modifier
                 .size(50.dp)
@@ -99,11 +145,14 @@ fun MessageCard(msg: Message) {
             }
         )
 
-        Column(modifier = Modifier.clickable { isExpanded = !isExpanded }) {
+        Column(
+            modifier = Modifier.clickable { isExpanded = !isExpanded }
+        ) {
             Text(
                 text = msg.author,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
+                fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colors.secondaryVariant,
                 style = MaterialTheme.typography.subtitle2,
                 modifier = Modifier.fillMaxWidth()
@@ -117,12 +166,17 @@ fun MessageCard(msg: Message) {
                 elevation = 4.dp,
                 modifier = Modifier.animateContentSize()
             ) {
-                Text(
-                    text = msg.body,
-                    maxLines = if (isExpanded) Int.MAX_VALUE else 1,
-                    style = MaterialTheme.typography.body2,
-                    modifier = Modifier.fillMaxWidth().padding(8.dp)
-                )
+                // LocalContentAlpha is defining opacity level of its children
+                CompositionLocalProvider(LocalContentAlpha provides ContentAlpha.medium) {
+                    Text(
+                        text = msg.body,
+                        maxLines = if (isExpanded) Int.MAX_VALUE else 1,
+                        style = MaterialTheme.typography.body2,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(8.dp)
+                    )
+                }
             }
         }
     }
