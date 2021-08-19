@@ -45,6 +45,10 @@
             android:name=".customlayout.CustomLayoutActivity"
             android:exported="true"
             android:theme="@style/Theme.Compose.NoActionBar" />
+        <activity
+            android:name=".state.StatefulActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Compose.NoActionBar" />
     </application>
 
 </manifest>
