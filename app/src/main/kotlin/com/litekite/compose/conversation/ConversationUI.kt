@@ -19,6 +19,7 @@ import android.content.res.Configuration
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -34,6 +35,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ContentAlpha
 import androidx.compose.material.Divider
@@ -71,8 +73,11 @@ fun Conversation(msgList: List<Message>) {
     Column {
         Row(
             modifier = Modifier
-                .fillMaxWidth()
-                .padding(5.dp)
+                .padding(8.dp)
+                .clip(RoundedCornerShape(8.dp))
+                .background(color = MaterialTheme.colors.surface)
+                .clickable(onClick = { /* Ignoring onClick */ })
+                .padding(16.dp)
         ) {
             Button(
                 onClick = {

@@ -49,6 +49,7 @@ fun ComposeConstraintUI() {
             Text("Button")
         }
 
+        // Barrier pos is flexible based on the refs
         val barrier = createBottomBarrier(button, margin = 6.dp)
 
         Text(
@@ -60,6 +61,7 @@ fun ComposeConstraintUI() {
             }
         )
 
+        // Guideline pos is fixed
         val guideline = createGuidelineFromEnd(0.5F)
 
         Text(

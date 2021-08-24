@@ -49,6 +49,10 @@
             android:name=".state.StatefulActivity"
             android:exported="true"
             android:theme="@style/Theme.Compose.NoActionBar" />
+        <activity
+            android:name=".state.todo.TodoActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Compose.NoActionBar" />
     </application>
 
 </manifest>
