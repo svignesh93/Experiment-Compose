@@ -16,14 +16,23 @@
 package com.litekite.compose.constraintlayout
 
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.material.Button
+import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ProvideTextStyle
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
@@ -44,9 +53,15 @@ fun ComposeConstraintUI() {
             modifier = Modifier.constrainAs(button) {
                 top.linkTo(parent.top, 16.dp)
                 centerHorizontallyTo(parent)
-            }
+            },
+            shape = MaterialTheme.shapes.small.copy(
+                bottomStart = ZeroCornerSize,
+                bottomEnd = ZeroCornerSize
+            )
         ) {
-            Text("Button")
+            ProvideTextStyle(value = MaterialTheme.typography.button) {
+                Text(text = "Button", style = LocalTextStyle.current)
+            }
         }
 
         // Barrier pos is flexible based on the refs
@@ -64,8 +79,20 @@ fun ComposeConstraintUI() {
         // Guideline pos is fixed
         val guideline = createGuidelineFromEnd(0.5F)
 
+        val textSpanStyle = MaterialTheme.typography.overline.toSpanStyle().copy(
+            background = MaterialTheme.colors.primary.copy(alpha = 0.1f)
+        )
+
         Text(
-            text = "Text2",
+            text = buildAnnotatedString {
+                append("Txt2")
+                withStyle(SpanStyle(color = Color.Red, fontSize = 16.sp)) {
+                    append("Red")
+                }
+                withStyle(textSpanStyle) {
+                    append("Span")
+                }
+            },
             modifier = Modifier.constrainAs(text2) {
                 // Coercing with at-most 100dp
                 width = Dimension.preferredWrapContent.atMost(100.dp)

@@ -26,8 +26,10 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
+import androidx.compose.material.contentColorFor
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.primarySurface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -70,7 +72,9 @@ fun AppBar(title: String, bodyContent: @Composable (Modifier) -> Unit, actionCli
                         .padding(5.dp)
                         .clip(CircleShape)
                 )
-            }
+            },
+            backgroundColor = MaterialTheme.colors.primarySurface,
+            contentColor = contentColorFor(MaterialTheme.colors.secondary)
         )
     }) { innerPadding -> bodyContent(Modifier.padding(innerPadding)) }
 }
