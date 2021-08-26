@@ -22,4 +22,8 @@
     <string name="cd_event">Event</string>
     <string name="cd_privacy">Privacy</string>
     <string name="cd_restore">Restore</string>
+    <string name="jet_news">Jetnews</string>
+    <string name="top">Top Story</string>
+    <string name="popular">Popular</string>
+    <string name="read_time">%1$d min read</string>
 </resources>
