@@ -57,6 +57,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
 import com.litekite.compose.base.ComposeApp
 import kotlinx.coroutines.launch
@@ -116,6 +117,7 @@ fun Conversation(msgList: List<Message>) {
     }
 }
 
+@OptIn(ExperimentalCoilApi::class)
 @Composable
 fun MessageCard(msg: Message) {
     // Column arranges elements vertically like a Vertical LinearLayout
