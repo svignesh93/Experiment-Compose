@@ -16,7 +16,6 @@
 package com.litekite.compose.anim
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateColor
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
@@ -98,7 +97,6 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.input.pointer.consumePositionChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.input.pointer.positionChange
 import androidx.compose.ui.input.pointer.util.VelocityTracker
@@ -201,10 +199,11 @@ fun Home() {
                 }
             )
         }
-    ) {
+    ) { paddingValues ->
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 32.dp),
-            state = lazyListState
+            state = lazyListState,
+            modifier = Modifier.padding(paddingValues)
         ) {
             // Weather
             item { Header(title = stringResource(R.string.weather)) }
@@ -272,8 +271,6 @@ fun Home() {
  *
  * @param extended Whether the tab should be shown in its expanded state.
  */
-// AnimatedVisibility is currently an experimental API in Compose Animation.
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun HomeFloatingActionButton(
     extended: Boolean,
@@ -304,7 +301,6 @@ private fun HomeFloatingActionButton(
 /**
  * Shows a message that the edit feature is not available.
  */
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 private fun EditMessage(shown: Boolean) {
     AnimatedVisibility(
@@ -420,7 +416,6 @@ private fun TopicRow(topic: String, expanded: Boolean, onClick: () -> Unit) {
 /**
  * Shows a separator for topics.
  */
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun TopicRowSpacer(visible: Boolean) {
     AnimatedVisibility(visible = visible) {
@@ -704,7 +699,7 @@ private fun Modifier.swipeToDismiss(
                         // Record the velocity of the drag.
                         velocityTracker.addPosition(change.uptimeMillis, change.position)
                         // Consume the gesture event, not passed to external
-                        change.consumePositionChange()
+                        change.consume()
                     }
                 }
                 // Dragging finished. Calculate the velocity of the fling.

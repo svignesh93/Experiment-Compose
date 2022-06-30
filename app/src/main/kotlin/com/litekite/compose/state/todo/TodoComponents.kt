@@ -17,7 +17,6 @@ package com.litekite.compose.state.todo
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.FastOutLinearInEasing
 import androidx.compose.animation.core.FastOutSlowInEasing
@@ -70,7 +69,6 @@ import androidx.compose.ui.unit.dp
  * @param modifier modifier for this element
  * @param visible (state) if the icon should be shown
  */
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AnimatedIconRow(
     icon: TodoIcon,
